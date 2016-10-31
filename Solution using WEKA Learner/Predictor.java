@@ -10,7 +10,9 @@ import weka.classifiers.functions.neural.*;
 import weka.core.FastVector;
 import weka.core.Instances;
  
+/*A class to handle the solution techniques and bring out the prediction*/
 public class Predictor {
+	/*A method to read from the data filefor train and test data*/
 	public static BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
  
@@ -23,8 +25,7 @@ public class Predictor {
 		return inputReader;
 	}
  
-	
- 
+	/*A method to split data for cross validation*/
 	public static Instances[][] crossValidationSplit(Instances data, int numberOfFolds) {
 		Instances[][] split = new Instances[2][numberOfFolds];
  
@@ -53,7 +54,7 @@ public class Predictor {
 		Instances[] testingSplits = split[1];
  
 		//Clasifier c=new ClassifierJ48();
-		Clasifier c=new  MultLyerPerceptron();
+		Clasifier c=new  MultLyerPerceptron();//Instantiate any classifier you want to create the model with
  
 		// Collect every group of predictions for current model in a FastVector
 		FastVector predictions = new FastVector();
