@@ -26,7 +26,7 @@ public class ClassEngine {
 	private static Corpus corpus =null;
 	File trainFile=null;
 	File testFile=null;
-    Document resDoc=null;
+        Document resDoc=null;
 	
 	public void createApp(String trainDataPath) throws GateException, IOException{
 		Gate.init();
@@ -39,12 +39,12 @@ public class ClassEngine {
 		
 		File trainFile = new File(trainDataPath);
 		
-	    Document doc=null;
-	    if(trainFile!=null){
+	        Document doc=null;
+	        if(trainFile!=null){
 		  		System.out.print("Processing document " + trainFile + "...\n");
 		  		doc=Factory.newDocument(trainFile.toURL(), encoding);
 		  		corp.add(doc); 
-	    }
+	        }
 
 		pfm .put("corpus", corp );
 		gate.creole.SerialAnalyserController pipeline = (gate.creole.SerialAnalyserController)
@@ -78,12 +78,12 @@ public class ClassEngine {
 		
 		testFile = new File(testDataPath);
 		
-	    resDoc=null;
-	    if(testFile!=null){
+	        resDoc=null;
+	        if(testFile!=null){
 		  		System.out.print("Processing document " + testFile + "...\n");
 		  		resDoc=Factory.newDocument(testFile.toURL(), encoding);
 		  		corpus.add(resDoc); 
-	    }
+	        }
 	    
 
 		controller.execute();
