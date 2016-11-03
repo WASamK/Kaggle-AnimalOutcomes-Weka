@@ -25,18 +25,18 @@ public class PreProcessor {
 	private static String[] annType=null;
 	private static List annotTypesToWrite = null;
 	
-	
+	/*A method to get the annotations of he sentences to an array*/
 	void extractAnn(String fileName, int trainSize) throws IOException{
 		int sentcnt=0;
 		annType=new String[trainSize];
 		
-		
+		/*Read the file. The first word of a line is the class label/annotation*/
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		try {
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
-	    	   String[] words = line.split(",");
-	    	   annType[sentcnt++]=words[0];
+	    	    String[] words = line.split(",");
+	    	    annType[sentcnt++]=words[0];
 
 		    while (line != null) {
 		        sb.append(line);
@@ -54,7 +54,7 @@ public class PreProcessor {
 		}
 	}
 	
-	
+	/*Pre process the test data*/
 	void preprocessTest(String path,int testSetSize,String preProcessedTest) throws GateException, IOException{
 		
 		Gate.init();
@@ -72,23 +72,18 @@ public class PreProcessor {
 		    	 
 		    	  Document doc = Factory.newDocument(docFile.toURL(), encoding);
 		    	  corpus.add(doc);
-		    	  
+		    	  /*Run annie for initial annotations*/
 		    	  annie.execute();
 				
 		    	  String docXMLString = null;
-				
-		    	  
 		    	  long[] startOffset=new long[testSetSize+1];
 		    	  long[] endOffset=new long[testSetSize+1];; 
 
 		    	  gate.AnnotationSet annotationSt = doc.getAnnotations("ASet");
 		    	  
 		    	  int sentenceCnt=0;
-		    	  
-
 		    	  if (annotationSt.size() == 0) 
 		    		  System.out.println("pipeline has failed to annotate.");
-		    	  
 		    	  else{
 		    		  Iterator itr=annotationSt.iterator();
 		    		  
@@ -100,14 +95,11 @@ public class PreProcessor {
 		    			      endOffset[sentenceCnt++]= ann.getEndNode().getOffset(); 
 		    			  }
 		    			      
-		    		  }
+		    		}
 
-
-                      for(int i=0; i<sentenceCnt;i++)
+                          for(int i=0; i<sentenceCnt;i++)
 	    			      annotationSt.add(startOffset[i],endOffset[i],"OutcomeType", gate.Utils.featureMap());
-
-		    		  
-		    	  }
+			  }
 		    	 
 		    	  if(annotTypesToWrite != null) {
 		    		  Set annotationsToWrite = new HashSet();
@@ -143,7 +135,7 @@ public class PreProcessor {
 		    	  }
 		
 	}
-	
+	/*A method to preprocess the train dataset*/
 	void preprocessTrain(String path,int trainSetSize,String preProcessedTrain) throws GateException, IOException{
 		
 		Gate.init();
