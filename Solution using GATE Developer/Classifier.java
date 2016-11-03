@@ -25,18 +25,11 @@ import gate.util.GateException;
 import gate.creole.ResourceInstantiationException;
 import gate.util.persistence.PersistenceManager;
 
-
-
 public class Classifier {
 	
-
-
-	public void saveApp(){
-
-	}
+	public void saveApp(){}
 
 	public static void main(String[] args) throws GateException, IOException {
-		// TODO Auto-generated method stub
 		
 		PreProcessor preProcessor=new PreProcessor();
 		
